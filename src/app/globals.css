@@ -1,0 +1,289 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Mabry Pro';
+  src: url('/fonts/MabryPro-Regular.woff2') format('woff2'),
+       url('/fonts/MabryPro-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Mabry Pro';
+  src: url('/fonts/MabryPro-Medium.woff2') format('woff2'),
+       url('/fonts/MabryPro-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Mabry Pro';
+  src: url('/fonts/MabryPro-Bold.woff2') format('woff2'),
+       url('/fonts/MabryPro-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: 'Mabry Pro', Arial, sans-serif;
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body, html {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'Mabry Pro', Arial, sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+  width: 100%;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+.marquee {
+  animation: marquee 12s linear infinite;
+}
+
+@keyframes gentle-float {
+  0%, 100% {
+    transform: translateY(0) scale(1) rotate(12deg);
+  }
+  50% {
+    transform: translateY(-8px) scale(1.02) rotate(14deg);
+  }
+}
+
+@keyframes chat-float {
+  0%, 100% {
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-6px) scale(1.01) rotate(2deg);
+  }
+}
+
+@keyframes star-float {
+  0%, 100% {
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-5px) scale(1.05) rotate(-5deg);
+  }
+}
+
+@keyframes squiggle-float {
+  0%, 100% {
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-4px) scale(1.03) rotate(3deg);
+  }
+}
+
+@keyframes button-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(251, 146, 60, 0.6);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 20px 4px rgba(251, 146, 60, 0.3);
+    transform: scale(1.02);
+  }
+}
+
+@keyframes button-shine {
+  0% {
+    background-position: 200% center;
+  }
+  100% {
+    background-position: -200% center;
+  }
+}
+
+.floating-premium {
+  animation: gentle-float 4s ease-in-out infinite;
+  filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.1));
+}
+
+.floating-chat {
+  animation: chat-float 5s ease-in-out infinite;
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.08));
+}
+
+.floating-star {
+  animation: star-float 4.5s ease-in-out infinite;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.06));
+}
+
+.floating-squiggle {
+  animation: squiggle-float 3.5s ease-in-out infinite;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.06));
+}
+
+.button-premium {
+  position: relative;
+  background: linear-gradient(
+    110deg,
+    #FFB333 0%,
+    #ffc566 45%,
+    #FFB333 48%,
+    #ffc566 100%
+  );
+  background-size: 200% auto;
+  animation: button-shine 8s linear infinite;
+  transition: all 0.3s ease;
+}
+
+.button-premium:hover {
+  animation: button-glow 2s ease-in-out infinite;
+  transform: translateY(-2px);
+  background-size: 200% auto;
+}
+
+.button-premium:active {
+  transform: translateY(1px);
+}
+
+.button-premium::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 9999px;
+  padding: 2px;
+  background: linear-gradient(
+    110deg,
+    rgba(255, 179, 51, 0.3) 0%,
+    rgba(255, 197, 102, 0.3) 45%,
+    rgba(255, 179, 51, 0.3) 48%,
+    rgba(255, 197, 102, 0.3) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.container-padding {
+  @apply px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl;
+}
+
+.section-padding {
+  @apply py-16 sm:py-20 md:py-24;
+}
+
+/* Add styles for sticky navbar */
+.navbar-sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  transition: all 0.3s ease-in-out;
+  backdrop-filter: blur(8px);
+}
+
+.navbar-wrapper {
+  position: relative;
+  height: 80px; /* Adjust this value based on your navbar height */
+}
+
+/* Vision Tags Unique Animation */
+@keyframes tag-float {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    filter: hue-rotate(0deg);
+  }
+  33% {
+    transform: translateY(-8px) rotate(2deg);
+    filter: hue-rotate(10deg);
+  }
+  66% {
+    transform: translateY(-4px) rotate(-1deg);
+    filter: hue-rotate(-10deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+    filter: hue-rotate(0deg);
+  }
+}
+
+@keyframes tag-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 179, 51, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 20px 4px rgba(255, 179, 51, 0.2);
+  }
+}
+
+.vision-tag {
+  background: #FFB333;
+  transition: all 0.3s ease;
+  animation: tag-float 6s ease-in-out infinite;
+  animation-delay: calc(var(--tag-index) * -2s);
+  position: relative;
+  overflow: hidden;
+}
+
+.vision-tag:hover {
+  animation: tag-pulse 2s infinite;
+  transform: translateY(-5px);
+}
+
+.vision-tag::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transform: rotate(45deg);
+  transition: all 0.6s ease;
+}
+
+.vision-tag:hover::before {
+  transform: rotate(45deg) translate(50%, 50%);
+}
+
+.vision-tag-education {
+  --tag-start-color: #FFB333;
+  --tag-end-color: #FFC966;
+  --delay: 0s;
+}
+
+.vision-tag-youth {
+  --tag-start-color: #F87239;
+  --tag-end-color: #FF9066;
+  --delay: 0.1s;
+}
+
+.vision-tag-community {
+  --tag-start-color: #2B2B2B;
+  --tag-end-color: #404040;
+  --delay: 0.2s;
+}

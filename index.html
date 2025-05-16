@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="refresh" content="0;url=/">
+  <title>BFF Land - Redirecting</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      background-color: #272727;
+      color: white;
+    }
+    .loading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .spinner {
+      border: 4px solid rgba(255, 179, 51, 0.3);
+      border-radius: 50%;
+      border-top: 4px solid #FFB333;
+      width: 40px;
+      height: 40px;
+      margin-bottom: 20px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="loading">
+    <div class="spinner"></div>
+    <h2>Redirecting to BFF Land...</h2>
+    <p>If you are not redirected automatically, <a href="/" style="color: #FFB333;">click here</a>.</p>
+  </div>
+  
+  <script>
+    // For Netlify deployment
+    document.addEventListener('DOMContentLoaded', function() {
+      window.location.href = '/';
+    });
+  </script>
+</body>
+</html>

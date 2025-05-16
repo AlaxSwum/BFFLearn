@@ -1,0 +1,270 @@
+/* Ultra-premium minimalist cursor with guaranteed arrow removal */
+:root {
+  --cursor-primary: rgba(255, 255, 255, 0.9);
+  --cursor-accent: #00F0FF;
+  --cursor-accent-alt: #FF00A8;
+  --cursor-size-outer: 40px;
+  --cursor-size-inner: 14px;
+  --cursor-trail-size: 10px;
+  --cursor-hover-scale: 1.2;
+}
+
+/* NUCLEAR OPTION: Remove ALL default cursors */
+* {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3C/svg%3E"), none !important;
+}
+
+body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, 
+pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, 
+q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, 
+dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, 
+tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, 
+section, summary, time, mark, audio, video, input, textarea, select, button {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3C/svg%3E"), none !important;
+}
+
+html {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3C/svg%3E"), none !important;
+  -webkit-cursor: none !important;
+  -moz-cursor: none !important;
+  -ms-cursor: none !important;
+}
+
+/* Force empty cursor for all possible states */
+*:hover, *:active, *:focus {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3C/svg%3E"), none !important;
+}
+
+/* Target cursor states explicitly */
+a, button, input[type="submit"], input[type="button"], [role="button"] {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3C/svg%3E"), none !important;
+}
+
+/* Target text inputs */
+input[type="text"], textarea {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3C/svg%3E"), none !important;
+}
+
+/* Target specific cursor states for ultimate coverage */
+[title], 
+.clickable, 
+.hoverable, 
+.draggable, 
+[draggable="true"], 
+[onclick], 
+[onmousedown], 
+[onmouseup] {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3C/svg%3E"), none !important;
+}
+
+/* Show custom cursor */
+body:hover .custom-cursor {
+  opacity: 1;
+}
+
+.custom-cursor {
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transition: opacity 0.3s ease;
+}
+
+/* Futuristic ring cursor with improved smoothness */
+.cursor-outer {
+  width: var(--cursor-size-outer);
+  height: var(--cursor-size-outer);
+  position: fixed;
+  z-index: 9999;
+  transform-origin: center;
+  mix-blend-mode: exclusion; /* Advanced color adaptation */
+  transition: transform 0.12s cubic-bezier(0.215, 0.61, 0.355, 1); /* Smoother easing curve */
+  border-radius: 50%;
+  background-color: transparent;
+  border: 1.5px solid var(--cursor-primary);
+  box-shadow: 0 0 25px 5px rgba(234, 234, 234, 0.2);
+  filter: drop-shadow(0 0 6px rgba(0, 240, 255, 0.5));
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  pointer-events: none; /* Keep this - cursor shouldn't interfere with clicks */
+}
+
+/* Neon glow effect */
+.cursor-outer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at center,
+    transparent 0%,
+    transparent 40%,
+    rgba(242, 242, 242, 0.896) 60%,
+    rgba(255, 0, 168, 0.05) 100%
+  );
+  opacity: 0.7;
+  z-index: -1;
+  filter: blur(8px);
+  animation: glow-shift 8s ease-in-out infinite;
+  pointer-events: none; /* Keep this */
+}
+
+@keyframes glow-shift {
+  0%, 100% {
+    opacity: 0.5;
+    filter: blur(8px) hue-rotate(0deg);
+  }
+  50% {
+    opacity: 0.8;
+    filter: blur(12px) hue-rotate(180deg);
+  }
+}
+
+/* LARGER dot cursor with smoother movement */
+.cursor-inner {
+  width: var(--cursor-size-inner);
+  height: var(--cursor-size-inner);
+  background: var(--cursor-primary);
+  border-radius: 50%;
+  position: fixed;
+  z-index: 10000;
+  mix-blend-mode: exclusion; /* Inverts color based on background */
+  transition: transform 0.03s cubic-bezier(0.215, 0.61, 0.355, 1), /* Ultra-smooth */
+              width 0.1s cubic-bezier(0.215, 0.61, 0.355, 1), 
+              height 0.1s cubic-bezier(0.215, 0.61, 0.355, 1),
+              background-color 0.1s ease;
+  box-shadow: 
+    0 0 15px 4px var(--cursor-accent),
+    0 0 30px 8px rgba(0, 240, 255, 0.3);
+  pointer-events: none; /* Keep this */
+}
+
+/* Elegant trailing dots with smoother movement */
+.cursor-inner::before, .cursor-inner::after {
+  content: '';
+  position: absolute;
+  width: var(--cursor-trail-size);
+  height: var(--cursor-trail-size);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15); 
+  z-index: -1;
+  transition: all 0.06s cubic-bezier(0.215, 0.61, 0.355, 1); /* Smoother */
+  opacity: 0.6;
+  box-shadow: 0 0 8px 2px rgba(0, 240, 255, 0.2);
+  pointer-events: none; /* Keep this */
+}
+
+.cursor-inner::before {
+  right: -18px;
+  top: -2px;
+  filter: blur(2px);
+}
+
+.cursor-inner::after {
+  right: -32px;
+  top: -3px;
+  filter: blur(3px);
+  opacity: 0.3;
+}
+
+/* Enhanced hover state */
+.cursor-inner.hover {
+  width: 24px;
+  height: 24px;
+  background: var(--cursor-accent);
+  mix-blend-mode: normal;
+  transform-origin: center;
+  box-shadow: 
+    0 0 15px 5px var(--cursor-accent),
+    0 0 25px 10px rgba(0, 240, 255, 0.4);
+  animation: cursor-pulse 1s ease-in-out infinite;
+}
+
+@keyframes cursor-pulse {
+  0%, 100% {
+    box-shadow: 
+      0 0 15px 5px var(--cursor-accent),
+      0 0 25px 10px rgba(0, 240, 255, 0.4);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 
+      0 0 18px 7px var(--cursor-accent),
+      0 0 30px 12px rgba(0, 240, 255, 0.5);
+    transform: scale(1.15);
+  }
+}
+
+/* Hide trail dots on hover */
+.cursor-inner.hover::before,
+.cursor-inner.hover::after {
+  opacity: 0;
+}
+
+/* Interactive element effects */
+a:hover ~ .custom-cursor .cursor-outer,
+button:hover ~ .custom-cursor .cursor-outer {
+  transform: scale(var(--cursor-hover-scale));
+  border-color: var(--cursor-accent);
+  box-shadow: 0 0 30px 10px rgba(0, 240, 255, 0.3);
+}
+
+a:active ~ .custom-cursor .cursor-outer,
+button:active ~ .custom-cursor .cursor-outer {
+  transform: scale(0.95);
+  border-color: var(--cursor-accent-alt);
+  box-shadow: 0 0 30px 10px rgba(255, 0, 168, 0.3);
+  transition: transform 0.1s ease, border-color 0.1s ease;
+}
+
+/* REMOVE BLUR FOR NAVBAR ELEMENTS */
+.navbar-wrapper a:hover ~ .custom-cursor .cursor-outer,
+.navbar-wrapper button:hover ~ .custom-cursor .cursor-outer,
+nav a:hover ~ .custom-cursor .cursor-outer,
+header a:hover ~ .custom-cursor .cursor-outer,
+.navbar a:hover ~ .custom-cursor .cursor-outer,
+[class*="navbar"] a:hover ~ .custom-cursor .cursor-outer {
+  filter: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-width: 2px;
+  border-color: var(--cursor-accent);
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.navbar-wrapper a:hover ~ .custom-cursor .cursor-inner,
+.navbar-wrapper button:hover ~ .custom-cursor .cursor-inner,
+nav a:hover ~ .custom-cursor .cursor-inner,
+header a:hover ~ .custom-cursor .cursor-inner,
+.navbar a:hover ~ .custom-cursor .cursor-inner,
+[class*="navbar"] a:hover ~ .custom-cursor .cursor-inner {
+  background-color: var(--cursor-accent);
+  mix-blend-mode: normal;
+  filter: none;
+  box-shadow: none;
+}
+
+/* Text selection cursor adjustment */
+::selection {
+  background-color: rgba(0, 240, 255, 0.2);
+  color: inherit;
+}
+
+/* Show default cursor only for touch devices */
+@media (hover: none) {
+  .cursor-outer,
+  .cursor-inner {
+    display: none;
+  }
+  
+  *, *::before, *::after {
+    cursor: auto !important;
+  }
+}
+
