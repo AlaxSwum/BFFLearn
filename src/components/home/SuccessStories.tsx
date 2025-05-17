@@ -118,7 +118,7 @@ const SuccessStories: React.FC = () => {
   const scrollCarousel = (direction: number) => {
     if (!carouselRef.current) return;
     
-    const cardWidth = carouselRef.current.clientWidth / 4;
+    const cardWidth = carouselRef.current.clientWidth / (isMobile ? 1 : 4);
     carouselRef.current.scrollBy({
       left: direction * cardWidth,
       behavior: 'smooth'
@@ -130,15 +130,17 @@ const SuccessStories: React.FC = () => {
       {/* Custom styles */}
       <style jsx global>{customStyles}</style>
       
-      {/* Grid Pattern Background - Top Left Corner Only */}
-      <svg className="absolute left-0 top-0 w-80 h-80 z-0" width="320" height="320">
-        <defs>
-          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#E5E7EB" strokeWidth="1" />
-          </pattern>
-        </defs>
-        <rect width="320" height="320" fill="url(#grid)" />
-      </svg>
+      {/* Grid Pattern Background - only show on desktop */}
+      {!isMobile && (
+        <svg className="absolute left-0 top-0 w-80 h-80 z-0" width="320" height="320">
+          <defs>
+            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#E5E7EB" strokeWidth="1" />
+            </pattern>
+          </defs>
+          <rect width="320" height="320" fill="url(#grid)" />
+        </svg>
+      )}
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 py-6">
         <div className="hidden">
@@ -170,7 +172,7 @@ const SuccessStories: React.FC = () => {
         <div className="mb-0">
           <div 
             ref={carouselRef} 
-            className="flex overflow-x-auto hide-scrollbar w-full pb-2 gap-4 md:gap-5 snap-x"
+            className={`flex overflow-x-auto hide-scrollbar w-full pb-2 gap-${isMobile ? '3' : '4'} md:gap-5 snap-x`}
             style={{ scrollBehavior: 'smooth' }}
           >
             {testimonials.map((testimonial, idx) => {
@@ -226,12 +228,12 @@ const SuccessStories: React.FC = () => {
                       
                       {/* Quote */}
                       <div className="mt-4 md:mt-5 flex-1 flex flex-col relative z-10">
-                        <div className="text-4xl md:text-5xl opacity-70 mb-2 md:mb-3">"</div>
+                        <div className="text-4xl md:text-5xl opacity-70 mb-2 md:mb-3">&ldquo;</div>
                         <div className="text-sm md:text-base leading-relaxed line-clamp-6">
                           {testimonial.quote}
                         </div>
                         <div className="flex justify-end mt-auto">
-                          <div className="text-4xl md:text-5xl opacity-70">"</div>
+                          <div className="text-4xl md:text-5xl opacity-70">&rdquo;</div>
                         </div>
                       </div>
                     </div>
