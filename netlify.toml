@@ -10,14 +10,19 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
-# Handle Next.js routing
+# Handle Next.js image optimization API
 [[redirects]]
-  from = "/*"
+  from = "/_next/image*"
+  to = "/_next/image:splat"
+  status = 200
+
+# Handle Next.js static files
+[[redirects]]
+  from = "/_next/static/*"
   to = "/_next/static/:splat"
   status = 200
-  force = true
-  conditions = {Path = ["/_next/static/*"]}
 
+# Handle all other routes
 [[redirects]]
   from = "/*"
   to = "/index.html"
